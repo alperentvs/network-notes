@@ -81,35 +81,45 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 * Repeater veya Hub , azalan sinyal gücünü yükselterek daha uzak mesafeye veri iletimini sağlarlar.
 
-    - Repeater, tek portlu; Hub, çok portludur
-
+    - Repeater, tek portlu; Hub, çok portludur.
+    
+    - Hub aptal çalışan bir cihazdır. Trafiği sorgulamaz, gelen veriyi direkt olarak iletir. Gelen trafiği alır.
+    
     - Bu, kablosuz yayınlar için de geçerlidir.
 
 ### Ağ Anahtarı (Network Switch)
 
 * Bilgisayar ve diğer ağ donanımlarının birbirilerine bağlanmasını sağlarlar.
 
+* Yapılacak konfigürasyonlar dahilinde akıllı çalışan cihazlardır.
+
 * Hub ve Repeater’lardan farklı olarak, kendisine bağlı olan cihazların MAC adreslerini bilmesi ve iletişimi bu MAC adreslerine göre adreslemesi/anahtarlamasıdır.
 
 * OSI ve TCP/IP katmanlarının (Layers) 2 veya 3.sünde çalışır.
 
-* L3 switchlerde IP Routing, Port Mirroring, VLAN, Port-MAC Matching gibi teknolojiler bulunmaktadır.
+* L2 switchlerde VLAN, Port Mirroring, Port Security gibi teknolojiler bulunmaktadır.
+
+* L3 switchlerde IP Routing, Port-MAC Matching gibi teknolojiler bulunmaktadır.
 
 * Switchler komut arayüzü (CLI) veya web arayüzü (HTTP) üzerinden konfigüre edilebilir.
 
 * Birbirilerine de bağlanabilirler. Birbirilerine bağlı oldukları porta Uplink Port adı verilir.
 
+* Switchler stack (şaseleme) yapılarak çoklandırılabilirler. 
+
+* SSH ve Telnet protokolleri aracılığı ile birbirlerinin komut ekranlarına uzaktan erişim sağlayabilirler.
+
 ### Yönlendirici (Router)
 
-* Geniş ağlarda ve internette kullanılırlar.
+* Farklı networkleri haberleştirmede kullanılan bir yönlendirici cihazdır.
 
 * Sadece MAC adreslerine göre değil; IP adreslerine göre de yönlendirme yaparlar.
 
-* Yapısı birbirinden farklı networkleri haberleştirirler. 
+* Switch özelliklerini de karşılar. 
 
 * Verileri bir ağdan diğerine yönlendirirler.
 
-* Kendisine gelen veriyi, hedefe en kısa yoldan erişitirme hesaplamaları yaparlar.
+* Kendisine gelen veriyi, hedefe en kısa yoldan erişitirme hesaplamaları yapabilirler. Bu durum kullanılan rotalama protokollerine ve topoloji durumuna bağlıdır.
 
 * Yazılımsal olarak da bu rolü temel düzeyde üstlenmiş farklı cihazlar vardır.
 
@@ -124,6 +134,8 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 * Ethernet sinyallerini xDSL, PSTN, ISDN veya Kabla hattı üzerinde hareket edecek yapıya dönüştürür.
 
 * Eğer hat dijital ise Dijital-Dijital; analog ise Dijital-Analog dönüşümü yapar.
+
+* Modemler aynı zamanda sunucu - router - switch - firewall - access point cihazlarının yapabildiği temel bir çok özellik ve teknolojiye sahiptir.
 
 ### Güvenlik Duvarı (Firewall)
 
@@ -266,7 +278,7 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
         - İpucu: Bir daire LAN ise; apartman WAN’dır. 
 
-        - Bir apartman LAN ise; site WAN’dır.
+        - Bir apartman LAN ise; site / mahalle WAN’dır.
     
 ### WAN Terminolojisi
 
@@ -334,9 +346,13 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 * Kullanıcıya en yakın, kullanıcı dostu katmandır. Kullanıcının bilgisayar dili tercümanı gibidir.
 
+* Son kullanıcıya hitap eder. Verilerin uygulamalar aracılığı ile kullanıcıya erişimini sağlar.
+
 #### 6- Presentation Layer (Sunum Katmanı):
 
-* Application katmanından gelen kullanıcının isteklerini yorumlayıp, alt katmanlara hazırlanması için işe koyulur.
+* Application ve Session katmanları için çift taraflı olarak gönderime hazırlık yapar.
+
+* Verilerin uygulamalarda çalışabilmesi için "jpeg-imap-png" gibi uzantılar ile veri türüne uygun hazırlık yapar.
 
 * Dönüştürme işlemlerini yapar.
 
@@ -370,11 +386,11 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 #### 3- Network Layer (Ağ Katmanı):
 
-* En önemli katmandır.
-
 * Paketlerin hangi route (rota) üzerinden gideceğini belirler.
 
 * Paketin hedefe ulaşımında birden fazla rota varsa doğrusuna karar vermekle sorumludur.
+
+* Lokalin sonlandığı ve internete çıkışın sağlandığı katmandır.
 
 * Bu yüzden IP adresi burada girilir.
 
@@ -388,7 +404,7 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 * MAC bilgisi burada girilir.
 
-* Network katmanından gelen segment’leri, Physical katmanda yola çıkabilecek şekilde frame’lere böler.
+* Network katmanından gelen paket’leri, Physical katmanda yola çıkabilecek şekilde frame’lere böler.
 
 * Frame tipi gibi bilgiler burada eklenir.
 
@@ -406,15 +422,20 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 * Bu katmanda pakete, paketin hangi sinyalle taşınacağı, bit’lerin ne şekilde dizileceği, konnektörlerdeki kaç pin ile çalışılacağı, adaptörün ne zaman veri gönderip alacağı, teslimatın başarı durumu gibi detaylar tanımlanır, pakete yazılır.
 
+
+##### NOT:
+
+Böylece veri yapısı katmanlar göz önünde bulundurulduğu zaman; " Data[7-6-5] / Segment[4] / Packet[3] / Frame[2-1] " şeklindedir.
+
 * Fiziksel detaylar…
 
 ### TCP (Transmission Control Protocol)
 
 * Bağlantı temelli, güvenilir bir iletim protokolüdür. 
 
-* Veri iletimine başlamadan önce gönderici ve alıcı arasında anlaşma sağlar. 
+* Veri iletimine başlamadan önce gönderici ve alıcı arasında anlaşma sağlar. Bu anlaşma " 3 Way Handshake" olarak adlandırılır.
 
-* Alıcıya ulaşmayan veriyi tekrar yollar.
+* Alıcıya ulaşmayan veriyi ulaşım sağlanana dek tekrar tekrar yollar.
 
 ### UDP (User Datagram Protocol)
 
@@ -422,11 +443,17 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 * Kontroller yapmadığı için TCP’den hızlıdır. 
 
+* İletim esnasında kaybedilen veriler tekrar gönderilmez. 
+
 * Hızın, güvenirlikten önemli olduğu bağlantılarda kullanılır.
 
 ### Portlar (Ports)
 
-* Portlar, bilgisayarların giriş kapılarıdırlar. 
+* Portlar, bilgisayarların giriş kapılarıdırlar.
+
+* Veri iletiminde port numaraları ve interface denilen fiziksel bağlantı noktalarına ait bilgiler kullanılır.
+
+* Yazılımsal açıdan olaya bakıldığında, port belli bir işleme ait olan mantıksal bir yapıdır.
 
 * TCP ve UDP bağlantılar, veriyi üst katmanlara taşımak veya uygulamaya iletmek için port numaraları kullanırlar. 
 
@@ -439,6 +466,13 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 ### TCP Bağlantı Başarım Araçları
 
 #### ARP (Address Resolution Protocol):
+
+ * Veri iletiminde kullanılan önemli bir protokoldür.
+
+ * MAC Adresleri ile IP Adreslerini eşleştirir. Bu eşleştirmeyi tablosuna kaydeder.
+
+ * Veri iletiminde verilerin kime ait olduğunu belirlemek için kullanılır.
+ 
 
 * Ağ cihazlarının 2 adresi vardır.
     
@@ -458,6 +492,8 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 ### TCP Bağlantı Başarım Araçları
 
 #### ICMP (Internet Control Message Protocol):
+
+* Bir cihazın başka bir cihaza olan erişimini kontrol etmek için gönderilen veri iletimidir. 
 
 * Sorun gidermek ve hata tespiti için kullanılır.
 
@@ -483,7 +519,7 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 ## IP ADRESLERİ
 
-### IP (Internet Protocol) Adresi
+### IP (Internet Protocol) Adresi (IPv4)
 
 * IP adresleri 2 kısımdan oluşur.
 
@@ -493,7 +529,9 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 ### IP (Internet Protocol) Adresi
 
-* Kural 1: 	Bir IP adresinde (Network ve Host ID dahil) 0’dan küçük, 255’ten büyük rakam olamaz!
+* Her oktet kendi içerisinde değerlendirildiği zaman, ikilik tabanda 2^0 ile 2^7 şeklinde düşünülmelidir.
+
+* Kural 1: 	Böylece, bir IP adresinde (Network ve Host ID dahil) 0’dan küçük, 255’ten büyük rakam olamaz!
 
 * Kural 2: 	Host ID’de, 1’den küçük, 254’ten büyük rakam olamaz.
 
@@ -501,23 +539,30 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 * Kural 4: 	127.0.0.1 IP’sini de kullanamazsın! Bu IP, bilgisayarın kendisine tahsistir. Network’teki yerinden bağımsız olarak her bilgisayarın kendisini temsil eder.
 
+* Kural 5: Sınıflarına ayrıldığı zaman "A-B-C-D-E" olmak üzere 5 sınıftan oluşur.
+
 ### IP (Internet Protocol) Adresi
 
-* IP adreslerinin Network ID ve Host ID’sini belirleyen faktör Subnet Mask (Alt Ağ Maskesi)’dır.
+* IP adreslerinin Network ID ve Host ID’sini belirleyen faktör Subnet Mask (Alt Ağ Maskesi)’dır. VLSM teknolojisi olarak da adlandırılır.
 
-* Subnet Mask’ı belirleyen de IP adresi sınıflarıdır.
+* Subnet Mask, sınıfları baz alarak ortaya çıkmış olsa da günümüzde sınıflardan bağımsız bir kullanım olanağı sağlamaktadır.
 
-* Her IP’nin Subnet Mask’ı ve sınıfı (class) vardır.
+* Ancak defaulta Subnet Mask'ı belirleyen IP adreslerinin sınıflarıdır.
+
+* Her IP’nin Subnet Mask’ı ve sınıfı (class) vardır. Günümüzde IP sınıflandırmasına bağlı teknolojiler devre dışı kalmış durumdadır.
 
 ### IP (Internet Protocol) Adresi
 
 * Bir ağda 3 tür haberleşme vardır.
 
-    1) 	**Unicast:** Bir cihazdan sadece bir cihaza yapılan iletim.
+    1) 	**Unicast:** Bir cihazdan sadece bir cihaza yapılan iletimdir.
     
-    2) 	**Multicast:** Bir cihazdan belirli bir grup cihaza yapılan iletim.
+    2) 	**Multicast:** Bir cihazdan belirli bir grup cihaza yapılan iletimdir.
 
-    3)	**Broadcast:** Bir cihazdan diğer tüm cihazlara yapılan iletim. Network’teki son host IP’si (.255), broadcast için kullanılır.
+    3)	**Broadcast:** Bir cihazdan diğer tüm cihazlara yapılan iletimdir. 
+
+ * Broadcast ve Network ID, mevcut IP ve subnete bağlı hesaplanmalıdır.
+
 
 ## AĞ SERVİSLERİ (NETWORK SERVICES)
 
@@ -529,9 +574,9 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
     - **DHCP**, talep eden bilgisayarlara ağa katılması için IP dağıtacaktır. 
 
-    - **DNS**, isim çözmelerine yardımcı olacaktır. 
+    - **DNS**, IP to URL için isim çözümlemesine yardımcı olacaktır. 
     
-    - **NAT** ise IP çevrimleri yaparak bilgisayarların dış dünyaya açılmasını sağlayacaktır.
+    - **NAT** Lokalde kullanılan IP Adresi ile sahip olduğunuz gerçek IP Adresi arasındaki IP çevirileri yaparak bilgisayarların dış dünyaya açılmasını sağlayacaktır.
 
 ### DNS (Domain Name Space):
 
@@ -541,11 +586,11 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
 * Hedefe ulaşmak isteyen kaynağın, IP adresine ihtiyacı vardır. (LAN’da veya WAN’da.)
 
-* Bu isimlerin IP karşılıkları gerekmektedir. İsim çözümlemesi yapılmalıdır. Bunları DNS sunucuları yaparlar.
+* Bu isimlere karşılık gelen IP adresleri gerekmektedir. İsim çözümlemesi yapılmalıdır. Bunları DNS sunucuları yaparlar.
 
-* DNS sunucusuna, www.alperentavas.com kimdir, IP’si nedir? denir. O da söyler
+* DNS sunucusuna, www.alperentavas.com kimdir, IP’si nedir? denir. DNS sunucusu da bu soruya yanıt verir.
 
-### DNS (Domain Name Space):
+### DNS ve Sunucu (Domain Name Space):
 * Bilgisayarlar (Windows) isim çözümlerken, DNS’e gitmeden önce kendi yöntemleriyle denerler.
 
     - **Hosts Dosyası:** Host isimlerini çözmek içindir. Bilgisayarın diskinde duran sabit bir dosyadır. C:\WINDOWS\System32\Drivers\Etc klasörü içindedir. Manuel olarak doldurulmalıdır. 
@@ -556,8 +601,6 @@ Bu repository [Sistem ve Network Mühendisliği](https://www.udemy.com/course/si
 
     - **Broadcast:** Bilgisayarların isimlerini çözmek için tüm ağa çağrı yapılmasıdır.
 
-### DNS (Domain Name Space):
-
 * **DNS Resolver (DNS Çözücü):**
 DNS sunucularına sorgu atan, client’larda (istemcilerde) çalışan servistir. Internet Browser da (Chrome veya Firefox da) birer resolver’dır.
 
@@ -566,8 +609,6 @@ Client’lardan gelen sorguları yanıtlamak için kullanılan, DNS veritabanın
 
 * **Query (Sorgu):**
 Client’ların DNS sunucuya veya DNS sunucunun diğer bir DNS sunucuya gönderdiği isim çözümleme istekleridir. Recursive (Client-Server) ve Iterative (Server-Server) olmak üzere 2 tip sorgu vardır.
-
-### DNS (Domain Name Space):
 
 * **DNS Resolver (DNS Çözücü):**
 
@@ -578,7 +619,7 @@ Client’ların DNS sunucuya veya DNS sunucunun diğer bir DNS sunucuya gönderd
     - Kaydedilmiş sorguları silmek için; Komut İstemcisi (Command Prompt/CMD)’ne
         - ipconfig /flushdns
 
-### DNS (Domain Name Space):
+### DNS ve Hiyerarşi (Domain Name Space):
 
 * İnternet’teki DNS’ler hiyerarşik bir isimlendirme metodu kullanırlar. Ağaç şeklinde domain grup’ları ve bu domain grup’larının alt grupları şeklindedir. Bütün domain’ler Root (kök) adı verilen tek bir domain’de birleşirler. Tüm domain’ler Root domain’in üyesidir. Bu yapıya DNS Hiyerarşisi (DNS Hierarchy) denir.
 
@@ -596,9 +637,15 @@ DNS sunucunun yetkili olduğu bölge, alandır. Bir DNS sunucusu birden fazla b�
 
 * Verilen IP’lerin ömür boyu olmaması için geçici süreliğine kiralar. Varsayılan kira süresi 8 gündür.
 
-* Biten kira süresinin ardından tekrar IP dağıtır.
+* Biten kira süresinin ardından tekrar IP dağıtır. 
+
+* Ağ adresleri sunucu içerisinde oluşturulan bir havuzda tutulur.
 
 * Dağıtılan IP aralığının içinden istenmeyen bir aralık dağıtımdan dışlanabilir. Buna Exclusion Range denir.
+
+* Ağ içerisinde bulunan cihazlar DHCP sunucusuna bir istek göndermesi durumunda belirlenmiş adresler mevcut cihaza atanır.
+
+* Dağıtılan adresler ve kadar süre kullanıldığı, kullanım sonrasında dahi kiralanan MAC adresi ile birlikte kayıt altında tutulur. 
 
 * Farklı IP istemeyen, sürekli aynı IP’sini kullanması gereken client’lara MAC adresiyle rezervasyon yapar.
 
@@ -627,6 +674,8 @@ DNS sunucunun yetkili olduğu bölge, alandır. Bir DNS sunucusu birden fazla b�
 
 ### NAT (Network Address Translation):
 
+* NAT Private IP yi Public IP ye çevirme işlemini yapar.
+
 * Bir network için geçerli 2 tür IP vardır:
 
     1) Private IP: Lokal network’te (LAN’da) kullanılan IP’lerdir. Lokal network’e aittirler. İç IP’lerdir. 
@@ -653,7 +702,7 @@ DNS sunucunun yetkili olduğu bölge, alandır. Bir DNS sunucusu birden fazla b�
 
 * Client’ın 192.168.2.10 Private IP’si 3000 portu ile, Server’ın 85.74.114.25 Public IP’sinin 80 portu ile haberleşemez. Çünkü farklı network’teler. Network ID’leri, subnet’leri farklı…
 
-* Araya NAT girerse haberleşebilirler…
+* NAT aracılığı ile lokalin internet ile haberleşmesine yardımcı olunur.
 
 * Modem’de, İnternet Hizmet Sağlayıcı (ISP) tarafından atanan bir Public IP vardır.
 
